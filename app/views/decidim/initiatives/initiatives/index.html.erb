@@ -28,8 +28,9 @@
   </div>
   <div class="row align-right">
     <div class="column flex justify-content-end">
+      <%# TODO: Change link for transparent trash index %>
       <%= link_to create_initiative_path(:select_initiative_type), class: "title-action__action button" do %>
-        Access transparent trash
+        <%= t("transparent_trash", scope: "decidim.initiatives.index") %>
       <% end %>
     </div>
   </div>

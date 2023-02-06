@@ -1,6 +1,9 @@
 ---
 en:
   decidim:
+    initiatives:
+      index:
+        transparent_trash: Access transparent trash
     components:
       transparent_trash:
         name: TransparentTrash
