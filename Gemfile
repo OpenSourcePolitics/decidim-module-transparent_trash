@@ -4,13 +4,12 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-
 # Inside the development app, the relative require has to be one level up, as
 # the Gemfile is copied to the development_app folder (almost) as is.
 base_path = File.basename(__dir__) == "development_app" ? "../" : ""
 require_relative "#{base_path}lib/decidim/transparent_trash/version"
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.27-stable" }
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.27-stable" }.freeze
 gem "decidim", DECIDIM_VERSION
 gem "decidim-initiatives", DECIDIM_VERSION
 gem "decidim-transparent_trash", path: "."
