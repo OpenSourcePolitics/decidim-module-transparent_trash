@@ -13,6 +13,14 @@ describe "Initiatives", type: :system do
     switch_to_host(organization.host)
   end
 
+  it "display transparent bin link" do
+    visit decidim_initiatives.initiatives_path
+
+    within "main#content > div.wrapper" do
+      expect(page).to have_link("Access transparent trash")
+    end
+  end
+
   context "when there are some published initiatives" do
     let!(:initiative) { base_initiative }
     let!(:unpublished_initiative) do
