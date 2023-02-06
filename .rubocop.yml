@@ -1,5 +1,6 @@
-inherit_from: https://raw.githubusercontent.com/decidim/decidim/develop/.rubocop.yml
-
+inherit_from:
+  - https://raw.githubusercontent.com/decidim/decidim/develop/.rubocop.yml
+  - .rubocop_disabled.yml
 AllCops:
   Include:
     - "**/*.rb"
@@ -11,3 +12,6 @@ AllCops:
     - "node_modules/**/*"
     - "db/schema.rb"
     - "vendor/**/*"
+    - "development_app/**/*"
+    - "spec/decidim_dummy_app/**/*"
+    - "bin/**/*"

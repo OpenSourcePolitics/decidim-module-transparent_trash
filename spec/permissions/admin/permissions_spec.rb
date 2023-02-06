@@ -18,7 +18,7 @@ module Decidim::TransparentTrash::Admin
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     context "when user is admin" do
-      let(:user) { create :user, :admin, organization: organization}
+      let(:user) { create :user, :admin, organization: organization }
 
       it { is_expected.to be_truthy }
 
