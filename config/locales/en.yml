@@ -1,6 +1,17 @@
 ---
 en:
   decidim:
+    transparent_trash:
+      initiatives:
+        filters_small_view:
+          close_modal: Close modal
+          filter_by: Search
+          unfold: Unfold
+          filter: Filter
+        index_header:
+          go_back: Go back to initiatives list
+        filters:
+          search: Search
     initiatives:
       index:
         transparent_trash: Access transparent trash

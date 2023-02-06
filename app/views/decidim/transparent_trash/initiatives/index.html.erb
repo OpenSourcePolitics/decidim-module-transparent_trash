@@ -11,26 +11,19 @@
 <%= participatory_space_wrapper do %>
   <div class="row columns">
     <div class="title-action">
-      <%= render partial: "index_header" %>
+      <%= render partial: "decidim/transparent_trash/initiatives/index_header" %>
     </div>
   </div>
 
   <div class="row">
     <div class="columns mediumlarge-4 large-3">
-      <%= render partial: "filters_small_view" %>
+      <%= render partial: "decidim/transparent_trash/initiatives/filters_small_view" %>
       <div class="card card--secondary show-for-mediumlarge">
-        <%= render partial: "filters" %>
+        <%= render partial: "decidim/transparent_trash/initiatives/filters" %>
       </div>
     </div>
-    <div id="initiatives" class="columns mediumlarge-8 large-9">
+    <div id="transparent_initiatives" class="columns mediumlarge-8 large-9">
       <%= render partial: "initiatives" %>
-    </div>
-  </div>
-  <div class="row align-right">
-    <div class="column flex justify-content-end">
-      <%= link_to initiatives_path(visibility: :transparent), class: "title-action__action button" do %>
-        <%= t("transparent_trash", scope: "decidim.initiatives.index") %>
-      <% end %>
     </div>
   </div>
 <% end %>
