@@ -13,6 +13,10 @@ en:
         filters:
           search: Search
     initiatives:
+      admin_log:
+        initiative:
+          invalidate: "%{user_name} published the %{resource_name} initiative as 'Invalidated'"
+          illegal: "%{user_name} published the %{resource_name} initiative as 'Illegal'"
       show:
         badge_name:
           illegal: Illegal

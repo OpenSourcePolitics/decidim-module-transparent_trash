@@ -157,7 +157,7 @@ module Decidim
                       },
                       index_on_create: ->(_initiative) { false },
                       # is Resourceable instead of ParticipatorySpaceResourceable so we can't use `visible?`
-                      index_on_update: ->(initiative) { initiative.published? })
+                      index_on_update: ->(initiative) { initiative.published? && !illegal? })
 
     def self.log_presenter_class_for(_log)
       Decidim::Initiatives::AdminLog::InitiativePresenter
@@ -208,7 +208,7 @@ module Decidim
     #
     # Returns a Boolean
     def closed?
-      discarded? || rejected? || accepted? ||  invalidated? ||  illegal? || !votes_enabled?
+      discarded? || rejected? || accepted? || invalidated? || illegal? || !votes_enabled?
     end
 
     # Public: Returns the author name. If it has been created by an organization it will

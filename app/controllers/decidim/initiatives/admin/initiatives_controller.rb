@@ -94,16 +94,27 @@ module Decidim
         # DELETE /admin/initiatives/:id/invalidate
         def invalidate
           enforce_permission_to :invalidate, :initiative, initiative: current_initiative
-          current_initiative.invalidated!
-          redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+
+          InvalidateInitiative.call(current_initiative, current_user) do
+            on(:ok) do
+              redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+            end
+          end
         end
 
         # DELETE /admin/initiatives/:id/illegal
         def illegal
           enforce_permission_to :illegal, :initiative, initiative: current_initiative
 
-          current_initiative.illegal!
-          redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+          IllegalInitiative.call(current_initiative, current_user) do
+            on(:ok) do |initiative|
+              flash[:notice] = "Initiative #{initiative.id} has been published as '#{initiative.state}'"
+              redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+            end
+            on(:invalid) do
+              redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+            end
+          end
         end
 
         # POST /admin/initiatives/:id/accept
