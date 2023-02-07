@@ -186,10 +186,7 @@ module Decidim
       end
 
       def transparent_collection
-        Decidim::TransparentTrash::TransparentInitiative
-          .includes(scoped_type: [:scope])
-          .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
-          .where(organization: current_organization)
+        collection
       end
 
       def collection
