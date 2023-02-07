@@ -13,6 +13,18 @@ en:
         filters:
           search: Search
     initiatives:
+      show:
+        badge_name:
+          illegal: Illegal
+          invalidated: Invalidated
+      admin_states:
+        illegal: Illegal
+        invalidated: Invalidated
+      admin:
+        initiatives:
+          edit:
+            illegal: Illegal
+            invalidate: Invalidate
       index:
         transparent_trash: Access transparent trash
     components:

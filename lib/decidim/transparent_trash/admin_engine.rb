@@ -19,6 +19,17 @@ module Decidim
         # root to: "transparent_trash#index"
       end
 
+      initializer "decidim_transparent_trash.admin_mount_routes" do
+        Decidim::Initiatives::AdminEngine.routes do
+          resources :initiatives, only: [:index, :edit, :update], param: :slug do
+            member do
+              delete :invalidate
+              delete :illegal
+            end
+          end
+        end
+      end
+
       def load_seed
         nil
       end
