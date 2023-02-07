@@ -29,6 +29,7 @@ module Decidim
             initiative,
             current_user
           ) do
+            initiative.components.each(&:unpublish!) if initiative.components.any?
             initiative.illegal!
             initiative
           end

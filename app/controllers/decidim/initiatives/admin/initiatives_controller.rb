@@ -97,6 +97,10 @@ module Decidim
 
           InvalidateInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.update.success", scope: "decidim.initiatives.admin")
+              redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
+            end
+            on(:invalid) do
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -107,8 +111,8 @@ module Decidim
           enforce_permission_to :illegal, :initiative, initiative: current_initiative
 
           IllegalInitiative.call(current_initiative, current_user) do
-            on(:ok) do |initiative|
-              flash[:notice] = "Initiative #{initiative.id} has been published as '#{initiative.state}'"
+            on(:ok) do
+              flash[:notice] = I18n.t("initiatives.update.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
             on(:invalid) do

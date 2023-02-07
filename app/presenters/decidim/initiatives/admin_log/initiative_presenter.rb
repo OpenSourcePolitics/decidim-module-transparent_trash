@@ -41,7 +41,7 @@ module Decidim
         end
 
         def diff_actions
-          super + %w(publish unpublish send_to_technical_validation)
+          super + %w(publish unpublish send_to_technical_validation invalidate illegal)
         end
       end
     end

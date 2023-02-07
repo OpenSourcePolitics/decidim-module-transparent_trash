@@ -22,14 +22,15 @@ module Decidim
         #
         # Returns nothing.
         def call
-          return broadcast(:invalid) unless initiative.published?
+          return broadcast(:invalid) if initiative.published?
 
           @initiative = Decidim.traceability.perform_action!(
-            :unpublish,
+            :invalidate,
             initiative,
             current_user
           ) do
-            initiative.invalidate!
+            initiative.components.each(&:unpublish!) if initiative.components.any?
+            initiative.invalidated!
             initiative
           end
           broadcast(:ok, initiative)
