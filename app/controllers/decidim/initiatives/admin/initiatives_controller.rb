@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module Decidim
   module Initiatives
     module Admin
@@ -195,7 +194,7 @@ module Decidim
             template: "decidim/initiatives/admin/initiatives/export_pdf_signatures",
             format: [:pdf]
           )
-          # byebug
+
           output = pdf_signature_service.new(pdf: output).signed_pdf if pdf_signature_service
 
           respond_to do |format|

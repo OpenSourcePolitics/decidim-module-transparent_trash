@@ -23,5 +23,5 @@ Gem::Specification.new do |s|
   s.summary = "A decidim transparent_trash module"
   s.description = "Provide a transparent trash where rejected initiaves are public and accessible."
 
-  s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,lib,vendor}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 end

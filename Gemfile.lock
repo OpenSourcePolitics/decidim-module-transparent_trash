@@ -834,6 +834,7 @@ DEPENDENCIES
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   web-console (~> 4.2)
+  wicked_pdf
 
 RUBY VERSION
    ruby 3.0.2p107
