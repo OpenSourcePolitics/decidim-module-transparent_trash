@@ -438,6 +438,74 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
     end
   end
 
+  context "when DELETE invalidate" do
+    let(:initiative) { create(:initiative, :validating, organization: organization) }
+
+    context "and Initiative owner" do
+      before do
+        sign_in initiative.author, scope: :user
+      end
+
+      it "Raises an error" do
+        delete :invalidate, params: { slug: initiative.to_param }
+        expect(flash[:alert]).not_to be_empty
+        expect(response).to have_http_status(:found)
+      end
+    end
+
+    context "and Administrator" do
+      let(:admin) { create(:user, :confirmed, :admin, organization: organization) }
+
+      before do
+        sign_in admin, scope: :user
+      end
+
+      it "initiative gets invalidated" do
+        delete :invalidate, params: { slug: initiative.to_param }
+        expect(response).to have_http_status(:found)
+        expect(flash[:notice]).not_to be_empty
+
+        initiative.reload
+        expect(initiative).to be_invalidated
+        expect(initiative.published_at).to be_nil
+      end
+    end
+  end
+
+  context "when DELETE illegal" do
+    let(:initiative) { create(:initiative, :validating, organization: organization) }
+
+    context "and Initiative owner" do
+      before do
+        sign_in initiative.author, scope: :user
+      end
+
+      it "Raises an error" do
+        delete :illegal, params: { slug: initiative.to_param }
+        expect(flash[:alert]).not_to be_empty
+        expect(response).to have_http_status(:found)
+      end
+    end
+
+    context "and Administrator" do
+      let(:admin) { create(:user, :confirmed, :admin, organization: organization) }
+
+      before do
+        sign_in admin, scope: :user
+      end
+
+      it "initiative gets illegal" do
+        delete :illegal, params: { slug: initiative.to_param }
+        expect(response).to have_http_status(:found)
+        expect(flash[:notice]).not_to be_empty
+
+        initiative.reload
+        expect(initiative).to be_illegal
+        expect(initiative.published_at).to be_nil
+      end
+    end
+  end
+
   context "when POST accept" do
     let!(:initiative) { create(:initiative, :acceptable, signature_type: "any", organization: organization) }
 
