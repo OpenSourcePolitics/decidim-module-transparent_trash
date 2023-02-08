@@ -8,7 +8,9 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
   let(:user) { create(:user, :confirmed, organization: organization) }
   let(:admin_user) { create(:user, :admin, :confirmed, organization: organization) }
   let(:organization) { create(:organization) }
-  let!(:initiative) { create(:initiative, organization: organization) }
+  let!(:initiative) { create(:initiative, organization: organization, title: title, description: description) }
+  let(:title) { generate_localized_title }
+  let(:description) { Decidim::Faker::Localized.wrapped("<p>", "</p>") { generate_localized_title } }
   let!(:created_initiative) { create(:initiative, :created, organization: organization) }
 
   before do
@@ -473,7 +475,7 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
   end
 
   context "when DELETE illegal" do
-    let(:initiative) { create(:initiative, :validating, organization: organization) }
+    let(:initiative) { create(:initiative, :validating, organization: organization, title: title, description: description) }
 
     context "and Initiative owner" do
       before do
@@ -502,6 +504,16 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
         initiative.reload
         expect(initiative).to be_illegal
         expect(initiative.published_at).to be_nil
+      end
+
+      it "saves the original initiative content" do
+        delete :illegal, params: { slug: initiative.to_param }
+        expect(response).to have_http_status(:found)
+
+        initiative.reload
+        expect(initiative).to be_illegal
+        expect(initiative.title).to match(title)
+        expect(initiative.description).to match(description)
       end
     end
   end
