@@ -49,6 +49,12 @@ describe "Admin updates initiative", type: :system do
           expect(page).to have_link("Edit")
           expect(page).to have_link("New")
         end
+
+        it "does not display 'invalidate' and 'illegal' button" do
+          page.find(".action-icon--edit").click
+          expect(page).not_to have_link("Invalidate")
+          expect(page).not_to have_link("Illegal")
+        end
       end
 
       context "when initiative is in validating state" do
@@ -70,6 +76,12 @@ describe "Admin updates initiative", type: :system do
           page.find(".action-icon--edit").click
           expect(page).to have_link("Edit")
           expect(page).to have_link("New")
+        end
+
+        it "displays 'invalidate' and 'illegal' button" do
+          page.find(".action-icon--edit").click
+          expect(page).to have_link("Invalidate")
+          expect(page).to have_link("Illegal")
         end
       end
 
