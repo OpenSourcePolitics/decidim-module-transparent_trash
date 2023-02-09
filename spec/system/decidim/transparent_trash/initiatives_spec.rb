@@ -25,6 +25,17 @@ describe "Initiatives", type: :system do
     end
   end
 
+  context "when an initiative is illegal" do
+    it "does not display content" do
+      within "#transparent_initiatives" do
+        expect(page).to have_content(translated(invalidated_initiative.title, locale: :en))
+        expect(page).not_to have_content(translated(illegal_initiative.title, locale: :en))
+        expect(page).to have_content("The title is not visible")
+        expect(page).to have_content("The initiative content is not visible")
+      end
+    end
+  end
+
   it "does not implement filters" do
     expect(page).not_to have_css(".with_any_state_check_boxes_tree_filter")
     expect(page).not_to have_css(".with_any_scope_check_boxes_tree_filter")
