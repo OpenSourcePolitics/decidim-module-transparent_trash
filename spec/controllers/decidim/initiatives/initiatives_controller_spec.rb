@@ -70,6 +70,17 @@ describe Decidim::Initiatives::InitiativesController, type: :controller do
         expect(subject.helpers.initiatives.first).to eq(commented_initiative)
       end
     end
+
+    context "when transparent trash" do
+      let!(:invalidated_initiative) { create(:initiative, state: :invalidated, organization: organization) }
+      let!(:illegal_initiative) { create(:initiative, state: :illegal, organization: organization) }
+
+      it "returns only invalidated and illegal initiative" do
+        get :index, params: { visibility: "transparent" }
+
+        expect(subject.helpers.initiatives.map(&:state).uniq).to match(["invalidated", "illegal"])
+      end
+    end
   end
 
   describe "GET show" do
