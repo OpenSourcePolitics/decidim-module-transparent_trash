@@ -81,7 +81,7 @@ module Decidim
     scope :published, -> { where.not(published_at: nil) }
     scope :with_state, ->(state) { where(state: state) if state.present? }
 
-    scope_search_multi :with_any_state, [:accepted, :rejected, :answered, :open, :closed, :invalidated]
+    scope_search_multi :with_any_state, [:accepted, :rejected, :answered, :open, :closed, :invalidated, :illegal]
 
     scope :currently_signable, lambda {
       where("signature_start_date <= ?", Date.current)

@@ -35,6 +35,9 @@ module Decidim
         enforce_permission_to :list, :initiative
 
         if transparent_initiatives?
+          params[:filter] ||= {}
+          params[:filter][:with_any_state] = %w(invalidated illegal)
+          @search = search_with(filter_params.merge(with_any_state: %w(invalidated illegal)))
           render template: "decidim/transparent_trash/initiatives/index"
         else
           index_initiatives
@@ -122,9 +125,7 @@ module Decidim
       alias collection initiatives
 
       def search_collection
-        return collection unless transparent_initiatives?
-
-        transparent_collection
+        collection
       end
 
       def default_filter_params
@@ -178,15 +179,11 @@ module Decidim
       end
 
       def search_transparent_initiatives_state
-        %w(invalid illegal)
+        %w(invalidated illegal)
       end
 
       def transparent_initiatives?
         params["visibility"] == "transparent"
-      end
-
-      def transparent_collection
-        collection
       end
 
       def collection
