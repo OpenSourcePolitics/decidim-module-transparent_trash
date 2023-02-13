@@ -16,7 +16,8 @@ en:
       initiatives:
         show:
           illegal:
-            content: Content moderated
+            description: Description content moderated
+            title: Title content moderated
       admin_log:
         initiative:
           invalidate: "%{user_name} published the %{resource_name} initiative as 'Invalidated'"

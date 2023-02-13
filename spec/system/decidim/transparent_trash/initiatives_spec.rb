@@ -19,7 +19,7 @@ describe "Initiatives", type: :system do
       expect(page).to have_content("2")
     end
 
-    within "#transparent_initiatives" do
+    within "#initiatives" do
       expect(page).not_to have_content(translated(initiative.title, locale: :en))
       expect(page).to have_content(translated(invalidated_initiative.title, locale: :en))
     end
@@ -27,11 +27,11 @@ describe "Initiatives", type: :system do
 
   context "when an initiative is illegal" do
     it "does not display content" do
-      within "#transparent_initiatives" do
+      within "#initiatives" do
         expect(page).to have_content(translated(invalidated_initiative.title, locale: :en))
         expect(page).not_to have_content(translated(illegal_initiative.title, locale: :en))
-        expect(page).to have_content("The title is not visible")
-        expect(page).to have_content("The initiative content is not visible")
+        expect(page).to have_content("Title content moderated")
+        expect(page).to have_content("Description content moderated")
       end
     end
   end

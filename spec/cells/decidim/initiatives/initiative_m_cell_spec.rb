@@ -120,7 +120,8 @@ module Decidim::Initiatives
 
 
         it "does not render the initiative content" do
-          expect(subject.to_s).to include("Content moderated")
+          expect(subject.to_s).to include("Title content moderated")
+          expect(subject.to_s).to include("Description content moderated")
           expect(subject.to_s).not_to include(translated(initiative.title))
           expect(subject.to_s).not_to include(translated(initiative.description))
         end

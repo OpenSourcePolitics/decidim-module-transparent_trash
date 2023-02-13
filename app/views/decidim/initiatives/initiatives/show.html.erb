@@ -76,7 +76,7 @@ edit_link(
       <div class="row column">
         <h2 class="heading2">
           <% if current_initiative.illegal? %>
-            <%= t(".illegal.content") %>
+            <%= t(".illegal.title") %>
           <% else %>
             <%= translated_attribute(current_initiative.title) %>
           <% end %>
@@ -87,7 +87,7 @@ edit_link(
       <div class="row column">
         <%= render partial: "initiative_badge", locals: { initiative: current_initiative } %>
         <% if current_initiative.illegal? %>
-          <%= t(".illegal.content") %>
+          <%= t(".illegal.description") %>
         <% else %>
           <%= decidim_sanitize_editor translated_attribute(current_initiative.description) %>
         <% end %>

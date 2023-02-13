@@ -134,7 +134,8 @@ describe "Initiative", type: :system do
           within "main" do
             expect(page).not_to have_content(translated(initiative.title, locale: :en))
             expect(page).not_to have_content(ActionView::Base.full_sanitizer.sanitize(translated(initiative.description, locale: :en), tags: []))
-            expect(page).to have_content("Content moderated")
+            expect(page).to have_content("Title content moderated")
+            expect(page).to have_content("Description content moderated")
           end
         end
       end

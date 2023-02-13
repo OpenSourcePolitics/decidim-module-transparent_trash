@@ -8,7 +8,7 @@
         <div>
           <h1 class="text-highlight heading2">
             <% if current_participatory_space.respond_to?(:illegal?) && current_participatory_space.illegal? %>
-              <%= t("decidim.initiatives.initiatives.show.illegal.content") %>
+              <%= t("decidim.initiatives.initiatives.show.illegal.title") %>
             <% else %>
               <%= participatory_space_helpers.translated_attribute(current_participatory_space.title) %>
             <% end %>

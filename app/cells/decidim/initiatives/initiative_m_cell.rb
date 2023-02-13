@@ -13,13 +13,13 @@ module Decidim
       private
 
       def title
-        return I18n.t("decidim.initiatives.initiatives.show.illegal.content") if model.illegal?
+        return I18n.t("decidim.initiatives.initiatives.show.illegal.title") if model.illegal?
 
         decidim_html_escape(translated_attribute(model.title))
       end
 
       def description
-        return I18n.t("decidim.initiatives.initiatives.show.illegal.content") if model.illegal?
+        return I18n.t("decidim.initiatives.initiatives.show.illegal.description") if model.illegal?
 
         super
       end
