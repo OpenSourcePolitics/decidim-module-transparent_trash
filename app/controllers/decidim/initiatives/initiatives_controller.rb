@@ -30,18 +30,18 @@ module Decidim
       helper_method :collection, :initiatives, :filter, :stats
       helper_method :initiative_type
 
+      TRANSPARENT_STATES = %w(invalidated illegal).freeze
+
       # GET /initiatives
       def index
         enforce_permission_to :list, :initiative
 
-        if transparent_initiatives?
-          params[:filter] ||= {}
-          params[:filter][:with_any_state] = %w(invalidated illegal)
-          @search = search_with(filter_params.merge(with_any_state: %w(invalidated illegal)))
-          render template: "decidim/transparent_trash/initiatives/index"
-        else
-          index_initiatives
-        end
+        return index_initiatives unless transparent_initiatives?
+
+        params[:filter] ||= {}
+        params[:filter][:with_any_state] = TRANSPARENT_STATES
+        @search = search_with(filter_params.merge(with_any_state: TRANSPARENT_STATES))
+        render template: "decidim/transparent_trash/initiatives/index"
       end
 
       # GET /initiatives/:id
@@ -125,7 +125,10 @@ module Decidim
       alias collection initiatives
 
       def search_collection
-        collection
+        Initiative
+          .includes(scoped_type: [:scope])
+          .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
+          .where(organization: current_organization)
       end
 
       def default_filter_params
@@ -183,14 +186,10 @@ module Decidim
       end
 
       def transparent_initiatives?
-        params["visibility"] == "transparent"
-      end
+        return true if params.dig("visibility") == "transparent"
+        return true if params.dig("filter", "visibility") == "transparent"
 
-      def collection
-        Initiative
-          .includes(scoped_type: [:scope])
-          .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
-          .where(organization: current_organization)
+        false
       end
     end
   end
