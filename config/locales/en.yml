@@ -13,6 +13,10 @@ en:
         filters:
           search: Search
     initiatives:
+      initiatives:
+        show:
+          illegal:
+            content: Content moderated
       admin_log:
         initiative:
           invalidate: "%{user_name} published the %{resource_name} initiative as 'Invalidated'"

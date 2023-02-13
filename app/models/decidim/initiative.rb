@@ -181,7 +181,7 @@ module Decidim
 
     # Public: Whether the object's comments are visible or not.
     def commentable?
-      type.comments_enabled?
+      type.comments_enabled? && !invalidated? && !illegal?
     end
 
     # Public: Check if an initiative has been created by an individual person.
