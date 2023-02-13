@@ -39,8 +39,8 @@ module Decidim
         return index_initiatives unless transparent_initiatives?
 
         params[:filter] ||= {}
-        params[:filter][:with_any_state] = TRANSPARENT_STATES
-        @search = search_with(filter_params.merge(with_any_state: TRANSPARENT_STATES))
+        params[:filter][:with_any_transparent_state] = TRANSPARENT_STATES
+        @search = search_with(filter_params.merge(with_any_transparent_state: TRANSPARENT_STATES))
         render template: "decidim/transparent_trash/initiatives/index"
       end
 
