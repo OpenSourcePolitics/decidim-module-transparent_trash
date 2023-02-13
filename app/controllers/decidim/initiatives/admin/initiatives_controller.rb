@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Decidim
   module Initiatives
     module Admin
@@ -31,10 +32,10 @@ module Decidim
 
           form_attachment_model = form(AttachmentForm).from_model(current_initiative.attachments.first)
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
-                    .from_model(
-                      current_initiative,
-                      initiative: current_initiative
-                    )
+                  .from_model(
+                    current_initiative,
+                    initiative: current_initiative
+                  )
           @form.attachment = form_attachment_model
 
           render layout: "decidim/admin/initiative"
@@ -46,7 +47,7 @@ module Decidim
 
           params[:id] = params[:slug]
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
-                    .from_params(params, initiative: current_initiative)
+                  .from_params(params, initiative: current_initiative)
 
           Decidim::Initiatives::Admin::UpdateInitiative.call(current_initiative, @form, current_user) do
             on(:ok) do |initiative|

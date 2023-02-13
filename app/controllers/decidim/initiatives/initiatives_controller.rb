@@ -70,10 +70,10 @@ module Decidim
         enforce_permission_to :edit, :initiative, initiative: current_initiative
         form_attachment_model = form(AttachmentForm).from_model(current_initiative.attachments.first)
         @form = form(Decidim::Initiatives::InitiativeForm)
-                  .from_model(
-                    current_initiative,
-                    initiative: current_initiative
-                  )
+                .from_model(
+                  current_initiative,
+                  initiative: current_initiative
+                )
         @form.attachment = form_attachment_model
 
         render layout: "decidim/initiative"
@@ -85,7 +85,7 @@ module Decidim
 
         params[:id] = params[:slug]
         @form = form(Decidim::Initiatives::InitiativeForm)
-                  .from_params(params, initiative_type: current_initiative.type, initiative: current_initiative)
+                .from_params(params, initiative_type: current_initiative.type, initiative: current_initiative)
 
         UpdateInitiative.call(current_initiative, @form, current_user) do
           on(:ok) do |initiative|
@@ -177,6 +177,7 @@ module Decidim
 
         search_transparent_initiatives_state
       end
+
       def search_initiatives_state
         %w(open)
       end
@@ -186,7 +187,7 @@ module Decidim
       end
 
       def transparent_initiatives?
-        return true if params.dig("visibility") == "transparent"
+        return true if params["visibility"] == "transparent"
         return true if params.dig("filter", "visibility") == "transparent"
 
         false

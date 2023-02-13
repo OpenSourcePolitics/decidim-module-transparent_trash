@@ -9,7 +9,7 @@ module Decidim
         subject { described_class.new(initiative, user) }
 
         let!(:initiative) { create :initiative, :validating }
-        let!(:components) { create_list :component, 4, participatory_space: initiative  }
+        let!(:components) { create_list :component, 4, participatory_space: initiative }
         let!(:user) { create :user, :admin, :confirmed, organization: initiative.organization }
 
         context "when the initiative is already published" do
@@ -26,10 +26,10 @@ module Decidim
           end
 
           it "unpublishes all related components" do
-            expect(initiative.components.map(&:published?)).to eq([true]*4)
+            expect(initiative.components.map(&:published?)).to eq([true] * 4)
             subject.call
             initiative.reload
-            expect(initiative.components.map(&:published?)).to eq([false]*4)
+            expect(initiative.components.map(&:published?)).to eq([false] * 4)
           end
 
           it "traces the action", versioning: true do

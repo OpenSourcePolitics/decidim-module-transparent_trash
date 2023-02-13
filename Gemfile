@@ -15,7 +15,6 @@ gem "decidim-initiatives", DECIDIM_VERSION
 gem "decidim-transparent_trash", path: "."
 gem "wicked_pdf"
 
-
 gem "bootsnap", "~> 1.4"
 gem "puma", ">= 5.6.2"
 

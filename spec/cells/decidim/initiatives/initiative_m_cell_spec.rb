@@ -97,12 +97,6 @@ module Decidim::Initiatives
           expect(subject).not_to have_content("0 comments")
         end
 
-        it "does not render comments" do
-          expect(subject).not_to have_css(".comments_count_status")
-          expect(subject).not_to have_content("0 comments")
-        end
-
-
         it "does not render follow button" do
           expect(subject).not_to have_css(".follow-button")
         end
@@ -117,7 +111,6 @@ module Decidim::Initiatives
           expect(subject).not_to have_css(".comments_count_status")
           expect(subject).not_to have_content("0 comments")
         end
-
 
         it "does not render the initiative content" do
           expect(subject.to_s).to include("Title content moderated")
