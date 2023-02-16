@@ -58,6 +58,10 @@ describe "Initiative", type: :system do
         end
       end
 
+      it "displays initiative title in title tab" do
+        expect(page).to have_title("#{translated(initiative.title)} - #{translated(initiative.title)} - #{organization.name}")
+      end
+
       context "when signature interval is defined" do
         let(:base_initiative) do
           create(:initiative,
@@ -137,6 +141,11 @@ describe "Initiative", type: :system do
             expect(page).to have_content("Title content moderated")
             expect(page).to have_content("Description content moderated")
           end
+        end
+
+        it "displays initiative moderated title in title tab" do
+          expect(page).not_to have_title("#{translated(initiative.title)} - #{translated(initiative.title)} - #{organization.name}")
+          expect(page).to have_title("Title content moderated - Title content moderated - #{organization.name}")
         end
       end
 
