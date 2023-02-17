@@ -158,7 +158,7 @@ module Decidim
                       },
                       index_on_create: ->(_initiative) { false },
                       # is Resourceable instead of ParticipatorySpaceResourceable so we can't use `visible?`
-                      index_on_update: ->(initiative) { initiative.published? && !illegal })
+                      index_on_update: ->(initiative) { initiative.published? })
 
     def self.log_presenter_class_for(_log)
       Decidim::Initiatives::AdminLog::InitiativePresenter
