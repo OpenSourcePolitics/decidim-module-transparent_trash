@@ -94,6 +94,12 @@ describe "Initiatives", type: :system do
         let!(:closed_initiative) do
           create(:initiative, :discarded, organization: organization)
         end
+        let!(:invalidated_initiative) do
+          create(:initiative, state: :invalidated, organization: organization)
+        end
+        let!(:illegal_initiative) do
+          create(:initiative, state: :illegal, organization: organization)
+        end
         let(:base_initiative) { nil }
 
         before do
@@ -107,6 +113,9 @@ describe "Initiatives", type: :system do
         it "shows closed initiatives" do
           within "#initiatives" do
             expect(page).to have_content(translated(closed_initiative.title, locale: :en))
+            expect(page).not_to have_content(translated(invalidated_initiative.title, locale: :en))
+            expect(page).not_to have_content(translated(illegal_initiative.title, locale: :en))
+            expect(page).not_to have_content("Title content moderated")
           end
         end
       end
