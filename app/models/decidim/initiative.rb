@@ -71,18 +71,17 @@ module Decidim
     validate :signature_type_allowed
 
     scope :open, lambda {
-      where.not(state: [:discarded, :rejected, :accepted, :created, :invalidated, :illegal])
+      where.not(state: [:discarded, :rejected, :accepted, :created])
            .currently_signable
     }
     scope :closed, lambda {
-      where(state: [:discarded, :rejected, :accepted, :invalidated, :illegal])
+      where(state: [:discarded, :rejected, :accepted])
         .or(currently_unsignable)
     }
     scope :published, -> { where.not(published_at: nil) }
     scope :with_state, ->(state) { where(state: state) if state.present? }
 
     scope_search_multi :with_any_state, [:accepted, :rejected, :answered, :open, :closed]
-    scope_search_multi :with_any_transparent_state, [:invalidated, :illegal]
 
     scope :currently_signable, lambda {
       where("signature_start_date <= ?", Date.current)
@@ -165,7 +164,7 @@ module Decidim
     end
 
     def self.ransackable_scopes(_auth_object = nil)
-      [:with_any_state, :with_any_type, :with_any_scope, :with_any_area, :with_any_transparent_state]
+      [:with_any_state, :with_any_type, :with_any_scope, :with_any_area]
     end
 
     delegate :document_number_authorization_handler, :promoting_committee_enabled?, to: :type
