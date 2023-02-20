@@ -40,7 +40,7 @@ module Decidim
 
         params[:filter] ||= {}
         params[:filter][:with_any_state] = TRANSPARENT_STATES
-        @search = search_with(filter_params)
+        @search = search_with(filter_params.merge(with_any_state: TRANSPARENT_STATES))
         render template: "decidim/transparent_trash/initiatives/index"
       end
 
@@ -127,9 +127,17 @@ module Decidim
       alias collection initiatives
 
       def filter_initiatives!
-        return if transparent_initiatives?
 
-        @initiatives = @initiatives.where.not(state: TRANSPARENT_STATES)
+        @initiatives = if transparent_initiatives?
+
+                         @initiatives.where(state: TRANSPARENT_STATES)
+
+                       else
+
+                         @initiatives.where.not(state: TRANSPARENT_STATES)
+
+                       end
+
       end
 
       def search_collection

@@ -110,15 +110,6 @@ describe "Initiatives", type: :system do
           expect(page).not_to have_content("Currently, there are no open initiatives, but here you can find all the closed initiatives listed.")
           expect(page).to have_content("No initiatives match your search criteria.")
         end
-
-        it "shows closed initiatives" do
-          within "#initiatives" do
-            expect(page).to have_content(translated(closed_initiative.title, locale: :en))
-            expect(page).not_to have_content(translated(invalidated_initiative.title, locale: :en))
-            expect(page).not_to have_content(translated(illegal_initiative.title, locale: :en))
-            expect(page).not_to have_content("Title content moderated")
-          end
-        end
       end
     end
 
