@@ -267,7 +267,7 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
         end
 
         it "does not pass to technical validation phase" do
-          created_initiative.type.update(minimum_committee_members: 4)
+          created_initiative.type.update(minimum_committee_members: 8)
           get :send_to_technical_validation, params: { slug: created_initiative.to_param }
 
           created_initiative.reload
