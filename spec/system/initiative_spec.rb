@@ -122,6 +122,10 @@ describe "Initiative", type: :system do
         let(:state) { :invalidated }
 
         it_behaves_like "initiative does not show signatures"
+
+        it_behaves_like "editable content for admins" do
+          let(:target_path) { decidim_initiatives.initiative_path(initiative) }
+        end
       end
 
       context "when initiative state is illegal" do
@@ -147,6 +151,11 @@ describe "Initiative", type: :system do
           expect(page).not_to have_title("#{translated(initiative.title)} - #{translated(initiative.title)} - #{organization.name}")
           expect(page).to have_title("Title content moderated - Title content moderated - #{organization.name}")
         end
+
+        it_behaves_like "editable content for admins" do
+          let(:target_path) { decidim_initiatives.initiative_path(initiative) }
+        end
+
       end
 
       it_behaves_like "has attachments"
