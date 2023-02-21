@@ -119,7 +119,7 @@ module Decidim
 
       def initiatives
         @initiatives = search.result.includes(:scoped_type)
-        filter_initiatives!
+        # filter_initiatives!
         @initiatives = reorder(@initiatives)
         @initiatives = paginate(@initiatives)
       end
@@ -141,10 +141,12 @@ module Decidim
       end
 
       def search_collection
-        Initiative
+        initiatives = Initiative
           .includes(scoped_type: [:scope])
           .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
           .where(organization: current_organization)
+
+        transparent_initiatives? ? initiatives.transparent : initiatives.not_transparent
       end
 
       def default_filter_params

@@ -25,6 +25,8 @@ module Decidim
     include Decidim::HasArea
     include Decidim::FilterableResource
 
+    TRANSPARENT_STATES = %w(invalidated illegal).freeze
+
     translatable_fields :title, :description, :answer
 
     belongs_to :organization,
@@ -80,6 +82,8 @@ module Decidim
     }
     scope :published, -> { where.not(published_at: nil) }
     scope :with_state, ->(state) { where(state: state) if state.present? }
+    scope :transparent, -> { where(state: TRANSPARENT_STATES) }
+    scope :not_transparent, -> { where.not(state: TRANSPARENT_STATES) }
 
     scope_search_multi :with_any_state, [:accepted, :rejected, :answered, :open, :closed]
 
