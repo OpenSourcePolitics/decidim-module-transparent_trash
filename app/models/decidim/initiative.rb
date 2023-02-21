@@ -271,7 +271,7 @@ module Decidim
     #
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
-      return false unless published?
+      return false unless published? || invalidated? || illegal?
 
       update(published_at: nil, state: "discarded")
     end

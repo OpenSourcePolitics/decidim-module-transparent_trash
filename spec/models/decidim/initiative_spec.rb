@@ -107,6 +107,36 @@ module Decidim
       end
     end
 
+    context "when invalidated initiative" do
+      let(:invalidated_initiative) { build :initiative, state: :invalidated }
+
+      it "is valid" do
+        expect(invalidated_initiative).to be_valid
+      end
+
+      it "unpublish!" do
+        invalidated_initiative.unpublish!
+
+        expect(invalidated_initiative).to be_discarded
+        expect(invalidated_initiative.published_at).to be_nil
+      end
+    end
+
+    context "when illegal initiative" do
+      let(:illegal_initiative) { build :initiative, state: :illegal }
+
+      it "is valid" do
+        expect(illegal_initiative).to be_valid
+      end
+
+      it "unpublish!" do
+        illegal_initiative.unpublish!
+
+        expect(illegal_initiative).to be_discarded
+        expect(illegal_initiative.published_at).to be_nil
+      end
+    end
+
     context "when validating initiative" do
       let(:validating_initiative) do
         build(:initiative,
