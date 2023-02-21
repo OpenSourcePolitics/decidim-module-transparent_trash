@@ -107,8 +107,7 @@ describe "Initiatives", type: :system do
         end
 
         it "displays a warning" do
-          expect(page).not_to have_content("Currently, there are no open initiatives, but here you can find all the closed initiatives listed.")
-          expect(page).to have_content("No initiatives match your search criteria.")
+          expect(page).to have_content("Currently, there are no open initiatives, but here you can find all the closed initiatives listed.")
         end
       end
     end
