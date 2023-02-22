@@ -155,7 +155,6 @@ describe "Initiative", type: :system do
         it_behaves_like "editable content for admins" do
           let(:target_path) { decidim_initiatives.initiative_path(initiative) }
         end
-
       end
 
       it_behaves_like "has attachments"

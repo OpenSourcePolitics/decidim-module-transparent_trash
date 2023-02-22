@@ -127,7 +127,6 @@ module Decidim
       alias collection initiatives
 
       def filter_initiatives!
-
         @initiatives = if transparent_initiatives?
 
                          @initiatives.where(state: TRANSPARENT_STATES)
@@ -137,14 +136,13 @@ module Decidim
                          @initiatives.where.not(state: TRANSPARENT_STATES)
 
                        end
-
       end
 
       def search_collection
         initiatives = Initiative
-          .includes(scoped_type: [:scope])
-          .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
-          .where(organization: current_organization)
+                      .includes(scoped_type: [:scope])
+                      .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
+                      .where(organization: current_organization)
 
         transparent_initiatives? ? initiatives.transparent : initiatives.not_transparent
       end
