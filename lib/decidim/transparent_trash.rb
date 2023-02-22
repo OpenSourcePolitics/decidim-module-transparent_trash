@@ -9,6 +9,7 @@ require "decidim/transparent_trash/extends/unpublish_initiative"
 require "decidim/transparent_trash/extends/initiatives_permissions"
 require "decidim/transparent_trash/extends/initiatives_admin_permissions"
 require "decidim/transparent_trash/extends/initiatives_controller"
+require "decidim/transparent_trash/extends/initiatives_admin_controller"
 
 module Decidim
   # This namespace holds the logic of the `TransparentTrash` component. This component

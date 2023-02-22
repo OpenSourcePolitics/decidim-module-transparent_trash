@@ -24,6 +24,7 @@ module Decidim
         Decidim::Initiatives::Permissions.include Decidim::TransparentTrash::Extends::InitiativesPermissions
         Decidim::Initiatives::Admin::Permissions.include Decidim::TransparentTrash::Extends::InitiativesAdminPermissions
         Decidim::Initiatives::InitiativesController.include Decidim::TransparentTrash::Extends::InitiativesController
+        Decidim::Initiatives::Admin::InitiativesController.include Decidim::TransparentTrash::Extends::InitiativesAdminController
       end
     end
   end
