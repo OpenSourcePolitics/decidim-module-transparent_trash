@@ -19,7 +19,7 @@ module Decidim
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
-      initializer "decidim.transparent_trash.extends" do
+      config.to_prepare do
         # Commands
         Decidim::Initiatives::Admin::UnpublishInitiative.include Decidim::TransparentTrash::Extends::UnpublishInitiative
         # Permissions
@@ -30,6 +30,7 @@ module Decidim
         Decidim::Initiatives::Admin::InitiativesController.include Decidim::TransparentTrash::Extends::InitiativesAdminController
         # Models
         Decidim::Comments::Seed.include Decidim::TransparentTrash::Extends::CommentsSeed
+        # Presenters
         Decidim::Initiatives::AdminLog::InitiativePresenter.include Decidim::TransparentTrash::Extends::InitiativePresenter
       end
     end
