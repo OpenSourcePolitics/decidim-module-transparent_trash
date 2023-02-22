@@ -78,6 +78,7 @@ describe Decidim::Initiatives::InitiativesController, type: :controller do
       it "returns only invalidated and illegal initiative" do
         get :index, params: { visibility: "transparent" }
 
+        expect(subject.helpers.initiatives.count).to eq(2)
         expect(subject.helpers.initiatives.map(&:state)).to include("invalidated", "illegal")
       end
     end

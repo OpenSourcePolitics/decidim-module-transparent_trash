@@ -23,6 +23,7 @@ module Decidim
         Decidim::Initiatives::Admin::UnpublishInitiative.include Decidim::TransparentTrash::Extends::UnpublishInitiative
         Decidim::Initiatives::Permissions.include Decidim::TransparentTrash::Extends::InitiativesPermissions
         Decidim::Initiatives::Admin::Permissions.include Decidim::TransparentTrash::Extends::InitiativesAdminPermissions
+        Decidim::Initiatives::InitiativesController.include Decidim::TransparentTrash::Extends::InitiativesController
       end
     end
   end
