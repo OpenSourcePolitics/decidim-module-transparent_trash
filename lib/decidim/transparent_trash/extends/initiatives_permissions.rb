@@ -6,7 +6,7 @@ module Decidim
   module TransparentTrash
     module Extends
       # module: decidim-initiatives
-      # path: decidim-initiatives/app/permissions/decidim/initiatives/initiatives_permissions.rb
+      # path: decidim-initiatives/app/permissions/decidim/initiatives/permissions.rb
       module InitiativesPermissions
         extend ActiveSupport::Concern
 
