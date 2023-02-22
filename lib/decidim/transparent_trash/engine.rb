@@ -30,6 +30,7 @@ module Decidim
         Decidim::Initiatives::Admin::InitiativesController.include Decidim::TransparentTrash::Extends::InitiativesAdminController
         # Models
         Decidim::Comments::Seed.include Decidim::TransparentTrash::Extends::CommentsSeed
+        Decidim::Initiatives::AdminLog::InitiativePresenter.include Decidim::TransparentTrash::Extends::InitiativePresenter
       end
     end
   end

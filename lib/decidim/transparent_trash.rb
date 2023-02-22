@@ -11,6 +11,7 @@ require "decidim/transparent_trash/extends/initiatives_admin_permissions"
 require "decidim/transparent_trash/extends/initiatives_controller"
 require "decidim/transparent_trash/extends/initiatives_admin_controller"
 require "decidim/transparent_trash/extends/comments_seed"
+require "decidim/transparent_trash/extends/initiative_presenter"
 
 module Decidim
   # This namespace holds the logic of the `TransparentTrash` component. This component
