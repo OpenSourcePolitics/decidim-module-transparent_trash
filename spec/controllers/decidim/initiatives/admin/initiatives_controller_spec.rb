@@ -469,7 +469,7 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
 
         initiative.reload
         expect(initiative).to be_invalidated
-        expect(initiative.published_at).to be_nil
+        expect(initiative.published_at).not_to be_nil
       end
     end
   end
@@ -503,7 +503,7 @@ describe Decidim::Initiatives::Admin::InitiativesController, type: :controller d
 
         initiative.reload
         expect(initiative).to be_illegal
-        expect(initiative.published_at).to be_nil
+        expect(initiative.published_at).not_to be_nil
       end
 
       it "saves the original initiative content" do
