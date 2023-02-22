@@ -18,6 +18,10 @@ module Decidim
       initializer "TransparentTrash.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+      initializer "decidim.transparent_trash.extends" do
+        Decidim::Initiatives::Admin::UnpublishInitiative.include Decidim::TransparentTrash::Extends::UnpublishInitiative
+      end
     end
   end
 end
