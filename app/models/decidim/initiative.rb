@@ -271,6 +271,48 @@ module Decidim
       )
     end
 
+    # Public: Publishes this initiative
+    #
+    # Returns true if the record was properly saved, false otherwise.
+    def invalidate!
+      return false if published?
+
+      update(
+        published_at: Time.current,
+        state: "invalidated",
+        signature_start_date: Date.current,
+        signature_end_date: Date.current
+      )
+    end
+
+    # Public: Publishes this initiative as invalidated
+    #
+    # Returns true if the record was properly saved, false otherwise.
+    def invalidate!
+      return false if published?
+
+      update(
+        published_at: Time.current,
+        state: "invalidated",
+        signature_start_date: nil,
+        signature_end_date: nil
+      )
+    end
+
+    # Public: Publishes this initiative as illegal
+    #
+    # Returns true if the record was properly saved, false otherwise.
+    def illegal!
+      return false if published?
+
+      update(
+        published_at: Time.current,
+        state: "illegal",
+        signature_start_date: nil,
+        signature_end_date: nil
+      )
+    end
+
     # Public: Unpublishes this initiative
     #
     # Returns true if the record was properly saved, false otherwise.

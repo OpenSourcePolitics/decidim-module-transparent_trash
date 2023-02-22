@@ -30,7 +30,7 @@ module Decidim
             current_user
           ) do
             initiative.components.each(&:unpublish!) if initiative.components.any?
-            initiative.invalidated!
+            initiative.invalidate!
             initiative
           end
           broadcast(:ok, initiative)

@@ -156,6 +156,20 @@ module Decidim
         expect(validating_initiative.published_at).not_to be_nil
       end
 
+      it "invalidate!" do
+        validating_initiative.invalidate!
+        expect(validating_initiative).not_to have_signature_interval_defined
+        expect(validating_initiative.published_at).not_to be_nil
+        expect(validating_initiative.state).to eq("invalidated")
+      end
+
+      it "illegal!" do
+        validating_initiative.illegal!
+        expect(validating_initiative).not_to have_signature_interval_defined
+        expect(validating_initiative.published_at).not_to be_nil
+        expect(validating_initiative.state).to eq("illegal")
+      end
+
       context "when mailing" do
         let(:message_delivery) { instance_double(ActionMailer::MessageDelivery) }
 
