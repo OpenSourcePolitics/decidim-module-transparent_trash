@@ -39,6 +39,12 @@ bundle
 | New states for initiatives   |    ✅     |
 | Changes on initiatives index |     ❌     |
 
+
+**Commands are available to have the list extends and overrides :**
+
+* `make extends`
+* `make overrides`
+
 ## Contributing
 
 Contributions are welcome !
