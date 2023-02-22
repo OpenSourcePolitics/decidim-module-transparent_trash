@@ -6,8 +6,8 @@ describe "Initiatives", type: :system do
   let(:route) { decidim_initiatives.initiatives_path(visibility: :transparent) }
   let(:organization) { create(:organization) }
   let!(:initiative) { create(:initiative, organization: organization) }
-  let!(:invalidated_initiative) { create(:initiative, state: "invalidated", organization: organization) }
-  let!(:illegal_initiative) { create(:initiative, state: "illegal", organization: organization) }
+  let!(:invalidated_initiative) { create(:initiative, :invalidated, organization: organization) }
+  let!(:illegal_initiative) { create(:initiative, :illegal, organization: organization) }
 
   before do
     switch_to_host(organization.host)

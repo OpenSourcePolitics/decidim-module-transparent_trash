@@ -5,7 +5,7 @@ module Decidim
     module Admin
       # A command with all the business logic that unpublishes an
       # existing initiative.
-      class InvalidateInitiative < Decidim::Command
+      class UnpublishInitiative < Decidim::Command
         # Public: Initializes the command.
         #
         # initiative - Decidim::Initiative
@@ -22,15 +22,14 @@ module Decidim
         #
         # Returns nothing.
         def call
-          return broadcast(:invalid) if initiative.published?
+          return broadcast(:invalid) unless initiative.published? || initiative.invalidated? || initiative.illegal?
 
           @initiative = Decidim.traceability.perform_action!(
-            :invalidate,
+            :unpublish,
             initiative,
             current_user
           ) do
-            initiative.components.each(&:unpublish!) if initiative.components.any?
-            initiative.invalidate!
+            initiative.unpublish!
             initiative
           end
           broadcast(:ok, initiative)

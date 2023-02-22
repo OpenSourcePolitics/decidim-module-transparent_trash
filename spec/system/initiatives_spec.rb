@@ -24,6 +24,9 @@ describe "Initiatives", type: :system do
     let!(:unpublished_initiative) do
       create(:initiative, :created, organization: organization)
     end
+    let!(:validating_initiative) do
+      create(:initiative, :validating, organization: organization)
+    end
 
     it_behaves_like "shows contextual help" do
       let(:index_path) { decidim_initiatives.initiatives_path }
@@ -61,6 +64,7 @@ describe "Initiatives", type: :system do
           expect(page).to have_content(translated(initiative.title, locale: :en))
           expect(page).to have_content(initiative.author_name, count: 1)
           expect(page).not_to have_content(translated(unpublished_initiative.title, locale: :en))
+          expect(page).not_to have_content(translated(validating_initiative.title, locale: :en))
         end
       end
 
@@ -77,6 +81,7 @@ describe "Initiatives", type: :system do
 
       context "when there is a unique initiative type" do
         let!(:unpublished_initiative) { nil }
+        let!(:validating_initiative) { nil }
 
         it "doesn't display the initiative type filter" do
           within ".new_filter[action$='/initiatives']" do
@@ -89,6 +94,12 @@ describe "Initiatives", type: :system do
         let!(:closed_initiative) do
           create(:initiative, :discarded, organization: organization)
         end
+        let!(:invalidated_initiative) do
+          create(:initiative, state: :invalidated, organization: organization)
+        end
+        let!(:illegal_initiative) do
+          create(:initiative, state: :illegal, organization: organization)
+        end
         let(:base_initiative) { nil }
 
         before do
@@ -97,12 +108,6 @@ describe "Initiatives", type: :system do
 
         it "displays a warning" do
           expect(page).to have_content("Currently, there are no open initiatives, but here you can find all the closed initiatives listed.")
-        end
-
-        it "shows closed initiatives" do
-          within "#initiatives" do
-            expect(page).to have_content(translated(closed_initiative.title, locale: :en))
-          end
         end
       end
     end

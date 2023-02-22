@@ -1,6 +1,13 @@
 ---
 en:
   decidim:
+    admin:
+      filters:
+        initiatives:
+          state_eq:
+            values:
+              illegal: Illegal
+              invalidated: Invalidated
     transparent_trash:
       initiatives:
         filters_small_view:

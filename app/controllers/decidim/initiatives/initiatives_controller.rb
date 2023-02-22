@@ -39,8 +39,8 @@ module Decidim
         return index_initiatives unless transparent_initiatives?
 
         params[:filter] ||= {}
-        params[:filter][:with_any_transparent_state] = TRANSPARENT_STATES
-        @search = search_with(filter_params.merge(with_any_transparent_state: TRANSPARENT_STATES))
+        params[:filter][:with_any_state] = TRANSPARENT_STATES
+        @search = search_with(filter_params.merge(with_any_state: TRANSPARENT_STATES))
         render template: "decidim/transparent_trash/initiatives/index"
       end
 
@@ -118,23 +118,39 @@ module Decidim
 
       def initiatives
         @initiatives = search.result.includes(:scoped_type)
+        # filter_initiatives!
         @initiatives = reorder(@initiatives)
         @initiatives = paginate(@initiatives)
       end
 
       alias collection initiatives
 
+      def filter_initiatives!
+        @initiatives = if transparent_initiatives?
+
+                         @initiatives.where(state: TRANSPARENT_STATES)
+
+                       else
+
+                         @initiatives.where.not(state: TRANSPARENT_STATES)
+
+                       end
+      end
+
       def search_collection
-        Initiative
-          .includes(scoped_type: [:scope])
-          .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
-          .where(organization: current_organization)
+        initiatives = Initiative
+                      .includes(scoped_type: [:scope])
+                      .joins("JOIN decidim_users ON decidim_users.id = decidim_initiatives.decidim_author_id")
+                      .where(organization: current_organization)
+
+        transparent_initiatives? ? initiatives.transparent : initiatives.not_transparent
       end
 
       def default_filter_params
         {
           search_text_cont: "",
           with_any_state: with_any_state,
+          # with_any_transparent_state: TRANSPARENT_STATES,
           with_any_type: default_filter_type_params,
           author: "any",
           with_any_scope: default_filter_scope_params,
@@ -173,9 +189,9 @@ module Decidim
       end
 
       def with_any_state
-        return search_initiatives_state unless transparent_initiatives?
+        return search_transparent_initiatives_state if transparent_initiatives?
 
-        search_transparent_initiatives_state
+        search_initiatives_state
       end
 
       def search_initiatives_state
@@ -183,7 +199,7 @@ module Decidim
       end
 
       def search_transparent_initiatives_state
-        %w(invalidated illegal)
+        TRANSPARENT_STATES
       end
 
       def transparent_initiatives?
