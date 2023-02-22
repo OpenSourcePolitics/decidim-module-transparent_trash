@@ -21,6 +21,7 @@ module Decidim
 
       initializer "decidim.transparent_trash.extends" do
         Decidim::Initiatives::Admin::UnpublishInitiative.include Decidim::TransparentTrash::Extends::UnpublishInitiative
+        Decidim::Initiatives::Permissions.include Decidim::TransparentTrash::Extends::InitiativesPermissions
       end
     end
   end
