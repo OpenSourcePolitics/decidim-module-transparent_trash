@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Override
+# module: decidim-initiatives
+# path: decidim-initiatives/app/models/decidim/initiative.rb
 module Decidim
   # The data store for a Initiative in the Decidim::Initiatives component.
   class Initiative < ApplicationRecord
@@ -183,6 +186,7 @@ module Decidim
     end
 
     # Public: Whether the object's comments are visible or not.
+    # Initiatives invalidated and illegal are not commentable
     def commentable?
       type.comments_enabled? && !invalidated? && !illegal?
     end
@@ -208,6 +212,8 @@ module Decidim
     # * It has been discarded.
     # * It has been rejected.
     # * It has been accepted.
+    # * It has been invalidated.
+    # * It has been illegal.
     # * Signature collection period has finished.
     #
     # Returns a Boolean
@@ -301,6 +307,7 @@ module Decidim
 
     # Public: Unpublishes this initiative
     #
+    # Allows to unpublish initiatives published, invalidated, illegal
     # Returns true if the record was properly saved, false otherwise.
     def unpublish!
       return false unless published? || invalidated? || illegal?
