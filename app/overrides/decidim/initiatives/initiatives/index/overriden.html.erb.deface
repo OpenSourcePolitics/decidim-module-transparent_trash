@@ -1,0 +1,9 @@
+<!-- insert_after 'div#initiatives' -->
+
+<div class="row align-right">
+    <div class="column flex justify-content-end">
+      <%= link_to initiatives_path(visibility: :transparent), class: "title-action__action button" do %>
+        <%= t("transparent_trash", scope: "decidim.initiatives.index") %>
+      <% end %>
+    </div>
+</div>
