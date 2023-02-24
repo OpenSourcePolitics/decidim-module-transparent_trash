@@ -27,8 +27,8 @@ fr:
             title: Contenu du titre modéré
       admin_log:
         initiative:
-          invalidate: "%{user_name} published the %{resource_name} initiative as 'Invalidated'"
-          illegal: "%{user_name} published the %{resource_name} initiative as 'Illegal'"
+          invalidate: "%{user_name} a publié la pétition %{resource_name} comme 'Invalidée'"
+          illegal: "%{user_name} a publié la pétition %{resource_name} comme 'Illégale'"
       show:
         badge_name:
           illegal: Illégale
