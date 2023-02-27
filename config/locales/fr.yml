@@ -1,0 +1,48 @@
+---
+fr:
+  decidim:
+    admin:
+      filters:
+        initiatives:
+          state_eq:
+            values:
+              illegal: Illégale
+              invalidated: Invalide
+    transparent_trash:
+      initiatives:
+        filters_small_view:
+          close_modal: Fermer la fenêtre
+          filter_by: Rechercher
+          unfold: Voir la suite
+          filter: Filtrer
+        index_header:
+          go_back: Retour à la liste des pétitions
+        filters:
+          search: Rechercher
+    initiatives:
+      initiatives:
+        show:
+          illegal:
+            description: Contenu de la description modéré
+            title: Contenu du titre modéré
+      admin_log:
+        initiative:
+          invalidate: "%{user_name} a publié la pétition %{resource_name} comme 'Invalidée'"
+          illegal: "%{user_name} a publié la pétition %{resource_name} comme 'Illégale'"
+      show:
+        badge_name:
+          illegal: Illégale
+          invalidated: Invalide
+      admin_states:
+        illegal: Illégale
+        invalidated: Invalide
+      admin:
+        initiatives:
+          edit:
+            illegal: Illégale
+            invalidate: Invalide
+      index:
+        transparent_trash: Accéder à la corbeille ouverte
+    components:
+      transparent_trash:
+        name: TransparentTrash

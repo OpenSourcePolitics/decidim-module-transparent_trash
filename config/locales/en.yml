@@ -1,6 +1,48 @@
 ---
 en:
   decidim:
+    admin:
+      filters:
+        initiatives:
+          state_eq:
+            values:
+              illegal: Illegal
+              invalidated: Invalidated
+    transparent_trash:
+      initiatives:
+        filters_small_view:
+          close_modal: Close modal
+          filter_by: Search
+          unfold: Unfold
+          filter: Filter
+        index_header:
+          go_back: Go back to initiatives list
+        filters:
+          search: Search
+    initiatives:
+      initiatives:
+        show:
+          illegal:
+            description: Description content moderated
+            title: Title content moderated
+      admin_log:
+        initiative:
+          invalidate: "%{user_name} published the %{resource_name} initiative as 'Invalidated'"
+          illegal: "%{user_name} published the %{resource_name} initiative as 'Illegal'"
+      show:
+        badge_name:
+          illegal: Illegal
+          invalidated: Invalidated
+      admin_states:
+        illegal: Illegal
+        invalidated: Invalidated
+      admin:
+        initiatives:
+          edit:
+            illegal: Illegal
+            invalidate: Invalidate
+      index:
+        transparent_trash: Access transparent trash
     components:
       transparent_trash:
         name: TransparentTrash
