@@ -7,7 +7,11 @@ module Decidim
     subject { described_class }
 
     it "has version" do
-      expect(subject.version).to eq("0.27.1")
+      expect(subject.version).to eq("0.0.1")
+    end
+
+    it "has Decidim version" do
+      expect(subject.decidim_version).to eq("0.27.1")
     end
   end
 end
