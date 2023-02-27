@@ -4,6 +4,10 @@ module Decidim
   # This holds the decidim-meetings version.
   module TransparentTrash
     def self.version
+      "0.0.1"
+    end
+
+    def self.decidim_version
       "0.27.1"
     end
   end

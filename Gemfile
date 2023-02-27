@@ -9,9 +9,8 @@ ruby RUBY_VERSION
 base_path = File.basename(__dir__) == "development_app" ? "../" : ""
 require_relative "#{base_path}lib/decidim/transparent_trash/version"
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.27-stable" }.freeze
-gem "decidim", DECIDIM_VERSION
-gem "decidim-initiatives", DECIDIM_VERSION
+gem "decidim", Decidim::TransparentTrash.decidim_version
+gem "decidim-initiatives", Decidim::TransparentTrash.decidim_version
 gem "decidim-transparent_trash", path: "."
 gem "deface"
 gem "wicked_pdf"
@@ -22,7 +21,7 @@ gem "puma", ">= 5.6.2"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
-  gem "decidim-dev", DECIDIM_VERSION
+  gem "decidim-dev", Decidim::TransparentTrash.decidim_version
 end
 
 group :development do
