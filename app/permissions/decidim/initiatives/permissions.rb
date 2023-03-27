@@ -218,7 +218,7 @@ module Decidim
 
       def see_versioning?
         return unless permission_action.action == :see_versioning &&
-          permission_action.subject == :initiative
+                      permission_action.subject == :initiative
 
         toggle_allow(authorship_or_admin?)
       end
